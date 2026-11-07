@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FAST Informational Text</title>
+<meta name="description" content="Grade 6 FAST tutorial: Reading Informational Text">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16244f; --navy2:#22357a; --gold:#f5b70a; --gold2:#ffd75e;
+  --ink:#1d2340; --muted:#5b6386; --bg:#f4f1ff; --card:#ffffff; --line:#e3e1f2;
+  --good:#16a34a; --goodbg:#e7f9ee; --bad:#dc2626; --badbg:#fdecec; --warn:#b45309; --warnbg:#fff4dc;
+  --accent:#7b3fe4; --accent2:#ff5fa2; --accentbg:#f1e9ff;
+  --r:18px; --shadow:0 6px 0 rgba(22,36,79,.10), 0 10px 24px rgba(22,36,79,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);background-image:radial-gradient(circle at 10% 0%,rgba(255,255,255,.9),transparent 40%),radial-gradient(circle at 100% 20%,var(--accentbg),transparent 45%);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;line-height:1.55;min-height:100vh;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,.fred{font-family:"Fredoka","Nunito",system-ui,sans-serif;line-height:1.2;margin:0}
+button{font-family:inherit;font-size:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+input{font-family:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* top bar */
+.top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 3px 0 var(--gold)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{height:52px;width:auto;background:#fff;border-radius:10px;padding:3px}
+.wordmark{font-family:"Fredoka",sans-serif;font-weight:600;line-height:1.05;font-size:15px;color:var(--gold2)}
+.wordmark b{display:block;color:#fff;font-size:19px;letter-spacing:.5px}
+.brand .ttl{font-family:"Fredoka",sans-serif;font-size:17px;font-weight:500;opacity:.95;border-left:2px solid rgba(255,255,255,.25);padding-left:10px}
+.stats{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:4px 10px;font-weight:800;font-size:15px;white-space:nowrap}
+.chip.gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.ibtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:12px;padding:5px 10px;font-weight:800;font-size:15px}
+.saved{font-size:13px;color:#b9f3c9;opacity:0;transition:opacity .4s;white-space:nowrap}
+.saved.on{opacity:1}
+.xpbar{height:8px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;width:100%}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;transition:width .6s}
+.lvlrow{width:100%;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;color:var(--gold2)}
+.lvlrow .xpbar{flex:1}
+
+main{padding:22px 0 40px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;border:2px solid var(--line)}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch}
+.hero h1{font-size:34px;color:var(--navy)}
+.hero .kicker{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:14px;margin-bottom:10px}
+.hero p{margin:.6em 0}
+.namebox{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.namebox input{flex:1;min-width:160px;font-size:20px;padding:10px 14px;border-radius:14px;border:3px solid var(--line);outline:none}
+.namebox input:focus{border-color:var(--accent)}
+.btn{border:none;border-radius:14px;padding:12px 20px;font-weight:900;font-size:18px;background:var(--accent);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18);transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn.ghost{background:#fff;color:var(--navy);border:3px solid var(--line);box-shadow:none}
+.btn.green{background:var(--good)}
+.btn.sm{padding:8px 14px;font-size:16px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.say{border:2px solid var(--accent);background:var(--accentbg);color:var(--accent);border-radius:999px;padding:5px 12px;font-weight:900;font-size:15px;white-space:nowrap}
+.say.on{background:var(--accent);color:#fff}
+.howto{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border:none}
+.howto h3{color:var(--gold2);margin-bottom:8px}
+.howto ul{margin:0;padding-left:0;list-style:none}
+.howto li{margin:6px 0;padding-left:34px;position:relative}
+.howto li span{position:absolute;left:0;top:0;font-size:22px}
+
+.sect{display:flex;align-items:center;gap:10px;margin:26px 0 12px;flex-wrap:wrap}
+.sect h2{font-size:24px;color:var(--navy)}
+.sect .sub{color:var(--muted);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.lockc{position:relative;text-align:left;background:#fff;border:3px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;transition:transform .12s,border-color .12s;color:var(--ink)}
+.lockc:hover{transform:translateY(-3px);border-color:var(--accent)}
+.lockc .ic{font-size:36px;line-height:1}
+.lockc h3{font-size:20px;color:var(--navy)}
+.lockc .code{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.3px}
+.lockc .sk{font-size:15px;color:var(--muted)}
+.lockc .st{margin-top:auto;display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px}
+.pill{border-radius:999px;padding:3px 10px;font-weight:900;font-size:13px}
+.pill.new{background:#eef0fb;color:var(--navy2)}
+.pill.go{background:var(--warnbg);color:var(--warn)}
+.pill.done{background:var(--goodbg);color:var(--good)}
+.lockc .keyabs{position:absolute;top:10px;right:10px}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 12px;font-weight:800;font-size:15px}
+.badge .e{font-size:24px}
+.badge.lock{opacity:.4;filter:grayscale(1)}
+.badge small{display:block;font-weight:600;color:var(--muted);font-size:12px}
+.vaultcta{margin-top:20px;text-align:center;background:linear-gradient(135deg,#fff7d6,#ffe9a8);border:3px solid var(--gold)}
+.vaultcta h2{color:var(--navy);margin-bottom:6px}
+
+/* lock view */
+.lockhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.lockhead .ic{font-size:40px}
+.lockhead h2{font-size:26px;color:var(--navy)}
+.lockhead .code{font-size:13px;font-weight:800;color:var(--muted)}
+.steps{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.stp{border:2px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-weight:900;font-size:14px;color:var(--muted)}
+.stp.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.stp.ok{background:var(--goodbg);border-color:#a7e3bd;color:var(--good)}
+.lcard{max-width:860px;margin:0 auto}
+.lcard .chead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.lcard .chead h3{font-size:24px;color:var(--navy);flex:1;min-width:200px}
+.tag{display:inline-block;border-radius:999px;padding:3px 12px;font-weight:900;font-size:13px;background:var(--accentbg);color:var(--accent)}
+.cbody p{margin:.5em 0}
+.cbody .big{font-size:21px}
+.callout{border-radius:14px;padding:12px 16px;margin:12px 0;border-left:6px solid var(--accent);background:var(--accentbg)}
+.callout.gold{border-color:var(--gold);background:#fff7dd}
+.callout.green{border-color:var(--good);background:var(--goodbg)}
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.term{border:2px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
+.term b{display:block;color:var(--accent);font-size:18px}
+.term span{font-size:16px}
+.flip{cursor:pointer;min-height:92px;position:relative}
+.flip .back{display:none}
+.flip.open .front{display:none}
+.flip.open .back{display:block}
+.flip .front{font-family:"Fredoka",sans-serif;font-size:20px;color:var(--navy);display:flex;align-items:center;justify-content:center;height:100%;text-align:center;flex-direction:column}
+.flip .front small{font-family:"Nunito";font-size:13px;color:var(--muted);font-weight:700}
+.stepl{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.stepl li{counter-increment:s;position:relative;padding:10px 12px 10px 56px;margin:8px 0;background:#fff;border:2px solid var(--line);border-radius:14px}
+.stepl li:before{content:counter(s);position:absolute;left:12px;top:10px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:900;display:flex;align-items:center;justify-content:center;font-family:"Fredoka"}
+.stepl li b{color:var(--navy)}
+.ex{background:#fffdf5;border:2px dashed var(--gold);border-radius:14px;padding:12px 16px;margin:10px 0;font-family:Georgia,"Times New Roman",serif;font-size:18px}
+.think{list-style:none;padding:0;margin:10px 0}
+.think li{display:flex;gap:10px;align-items:flex-start;margin:8px 0;background:#f6f8ff;border-radius:12px;padding:10px 12px}
+.think li:before{content:"💭";font-size:20px}
+.myth{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.myth div{border-radius:14px;padding:10px 14px}
+.myth .m{background:var(--badbg);border:2px solid #f5c2c2}
+.myth .f{background:var(--goodbg);border:2px solid #a7e3bd}
+.myth b{display:block;font-size:14px;letter-spacing:.4px}
+.myth .m b{color:var(--bad)}
+.myth .f b{color:var(--good)}
+table.t{width:100%;border-collapse:separate;border-spacing:0;border:2px solid var(--line);border-radius:14px;overflow:hidden;margin:10px 0;font-size:16px}
+table.t th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-family:"Fredoka";font-weight:500}
+table.t td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top;background:#fff}
+table.t tr:nth-child(even) td{background:#faf9ff}
+.tablewrap{overflow-x:auto}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--accent);transform:scale(1.25)}
+.dot.g{background:var(--good)}.dot.y{background:var(--gold)}.dot.r{background:#f08a8a}
+
+/* practice */
+.prac{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.prac.solo{grid-template-columns:1fr;max-width:860px;margin:0 auto}
+.passage{position:sticky;top:120px;max-height:calc(100vh - 140px);overflow:auto}
+.passage h3{color:var(--navy);font-size:21px}
+.ptext{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.65}
+.ptext p{margin:.6em 0}
+.ptext .pn{display:inline-block;min-width:22px;font-family:"Nunito";font-weight:900;font-size:12px;color:#fff;background:var(--navy2);border-radius:6px;padding:0 5px;margin-right:6px;vertical-align:2px;text-align:center}
+.ptext .poem{white-space:pre-line;font-style:italic}
+.ptext h4{font-family:"Fredoka";color:var(--accent);margin-top:10px}
+.ptext .src{font-family:"Nunito";font-size:13px;color:var(--muted)}
+.qtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.dok{border-radius:999px;padding:4px 12px;font-weight:900;font-size:13px;color:#fff}
+.dok1{background:#0ea5a4}.dok2{background:#2563eb}.dok3{background:#9333ea}
+.qnum{font-weight:900;color:var(--muted);font-size:14px}
+.qtext{font-size:21px;font-weight:800;color:var(--navy);margin:6px 0 14px}
+.excerpt{background:#fffdf5;border-left:5px solid var(--gold);padding:10px 14px;border-radius:10px;font-family:Georgia,serif;margin:0 0 12px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;background:#fff;border:3px solid var(--line);border-radius:16px;padding:12px 14px;font-size:18px;color:var(--ink);transition:border-color .1s,transform .08s;width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt .L{flex:none;width:34px;height:34px;border-radius:10px;background:var(--accentbg);color:var(--accent);font-weight:900;display:flex;align-items:center;justify-content:center;font-family:"Fredoka"}
+.opt.wrong{border-color:#f5b5b5;background:var(--badbg);color:#8a2b2b;pointer-events:none}
+.opt.wrong .L{background:var(--bad);color:#fff}
+.opt.right{border-color:var(--good);background:var(--goodbg);pointer-events:none}
+.opt.right .L{background:var(--good);color:#fff}
+.opt.dim{opacity:.55;pointer-events:none}
+.fb{margin-top:14px;border-radius:16px;padding:14px 16px;font-size:17px;animation:pop .25s ease}
+.fb.bad{background:var(--badbg);border:2px solid #f5c2c2}
+.fb.good{background:var(--goodbg);border:2px solid #a7e3bd}
+.fb.hint{background:#fff7dd;border:2px solid #f6d77c}
+.fb h4{font-size:19px;margin-bottom:4px}
+.fb.bad h4{color:var(--bad)}.fb.good h4{color:var(--good)}.fb.hint h4{color:var(--warn)}
+.fb .fbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.qtools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.hintbtn{border:2px dashed var(--gold);background:#fffaf0;color:var(--warn);border-radius:999px;padding:6px 14px;font-weight:900;font-size:15px}
+.linkbtn{background:none;border:none;color:var(--accent);font-weight:900;text-decoration:underline;font-size:15px;padding:4px}
+.pts{font-family:"Fredoka";font-weight:600;color:var(--accent)}
+details.pmob{display:none}
+
+/* result */
+.result{text-align:center;max-width:720px;margin:0 auto}
+.result h2{font-size:32px;color:var(--navy);margin:8px 0}
+.bigkey{animation:spinin 1s cubic-bezier(.2,1.4,.4,1) both}
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.rstat{background:#f7f6ff;border-radius:14px;padding:10px}
+.rstat b{display:block;font-size:26px;font-family:"Fredoka";color:var(--accent)}
+.rstat span{font-size:14px;font-weight:800;color:var(--muted)}
+
+/* vault */
+.vault{max-width:760px;margin:0 auto;text-align:center}
+.door{width:260px;height:260px;margin:10px auto 20px;border-radius:50%;background:radial-gradient(circle,#c9ced9 0%,#8d95a8 60%,#5d667a 100%);border:12px solid #3d4558;position:relative;box-shadow:0 12px 30px rgba(0,0,0,.25);transition:transform 1.4s cubic-bezier(.6,0,.3,1)}
+.door .wheel{position:absolute;inset:60px;border-radius:50%;border:10px solid #2f3647;transition:transform 1.4s}
+.door .wheel:before,.door .wheel:after{content:"";position:absolute;left:50%;top:-10px;bottom:-10px;width:10px;margin-left:-5px;background:#2f3647}
+.door .wheel:after{transform:rotate(90deg)}
+.door.open{transform:perspective(800px) rotateY(-75deg) translateX(-40px)}
+.door.open .wheel{transform:rotate(540deg)}
+.cert{background:#fff;border:6px double var(--gold);border-radius:20px;padding:26px;margin-top:10px}
+.cert h1{font-size:32px;color:var(--navy)}
+.cert .nm{font-family:"Fredoka";font-size:36px;color:var(--accent);margin:8px 0;border-bottom:3px solid var(--gold);display:inline-block;padding:0 20px}
+.keyring{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0}
+
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 30px}
+footer button{font-size:12px;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 8px;color:var(--muted);margin-top:8px}
+
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:99}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(140px);background:var(--navy);color:#fff;border:3px solid var(--gold);border-radius:18px;padding:10px 18px;font-weight:900;font-size:18px;z-index:98;transition:transform .35s cubic-bezier(.2,1.4,.4,1);max-width:92vw;text-align:center}
+#toast.on{transform:translateX(-50%) translateY(0)}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes spinin{from{transform:scale(0) rotate(-200deg)}to{transform:scale(1) rotate(0)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.wiggle{animation:wiggle .4s ease 2}
+
+@media (max-width:900px){
+  .prac{grid-template-columns:1fr}
+  .passage{position:static;max-height:none}
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:17px}
+  .top{position:relative}
+  .passage{top:0}
+  .brand .ttl{display:none}
+  .hero h1{font-size:27px}
+  .myth{grid-template-columns:1fr}
+  .qtext{font-size:19px}
+  .rstats{grid-template-columns:1fr 1fr}
+  .card{padding:16px}
+}
+@media print{
+  .top,footer,.noprint{display:none!important}
+  body{background:#fff}
+}
+.opened{font-size:90px;line-height:1;margin:10px auto;filter:drop-shadow(0 0 24px rgba(245,183,10,.8));animation:spinin .9s cubic-bezier(.2,1.4,.4,1) both}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<canvas id="confetti"></canvas>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+/* LOGO: paste your logo as a data URL or image path between the quotes, e.g. window.LOGO_SRC = "logo.png"; */
+window.LOGO_SRC = "";
+</script>
+<script>
+window.TUTORIAL = {
+id:"cat2",
+short:"Informational Text",
+kicker:"FAST Category 2 of 3",
+title:"Reading Informational Text",
+intro:`This tutorial teaches you every Grade 6 skill in the <b>Reading Informational Text</b> category of the Florida FAST test: how text features and sections build meaning, how central ideas develop, how authors’ purposes shape different accounts of the same event, and how arguments are built with reasoning. Each lock has a lesson and FAST-style practice.`,
+theme:{accent:"#0f8f8c",accent2:"#22c1c3",accentbg:"#e2f7f6"},
+locks:[
+/* ================= LOCK 1: R.2.1 ================= */
+{id:"r21",code:"ELA.6.R.2.1",icon:"🧩",name:"Text Feature Blueprint",skill:"How sections and text features convey meaning",
+remember:"Every section and feature has a JOB. Ask: What does this part add that the rest of the text doesn’t? Then name its job: introduce, explain a cause, show a process, give an example, picture an idea, or offer a solution.",
+lesson:[
+{t:"big",h:"Every part of a text has a job",body:`<p class="big">Informational texts are built like a house. Each <b>section</b> (introduction, body sections, conclusion) and each <b>text feature</b> (heading, caption, diagram, sidebar) is a room with a <b>job</b>.</p>
+<p>This skill asks you to explain <b>how</b> a section or feature helps the reader understand the topic. For example:</p>
+<ul><li>A <b>heading</b> tells you what a section will be about.</li><li>A <b>diagram</b> helps you picture something that is hard to imagine.</li><li>A <b>sidebar</b> adds an interesting extra fact.</li><li>A section organized by <b>cause and effect</b> explains WHY something happens.</li></ul>
+<div class="callout">🧩 <b>The big question:</b> “What does this part ADD to my understanding, and how does it connect to the whole text?”</div>`},
+{t:"table",h:"Text features and their jobs",head:["Feature","Its job"],
+rows:[["Title &amp; headings","Tell the topic of the whole text or of one section; help you predict and locate information"],
+["Bold or italic words","Signal important vocabulary"],["Photos &amp; illustrations","Show what something looks like"],
+["Captions","Explain what a picture or diagram shows"],["Diagrams","Show the parts of something or how it works"],
+["Charts, graphs &amp; tables","Organize numbers or data so you can compare"],["Timelines","Show events in time order"],
+["Maps","Show where something is or happened"],["Sidebars / “Did You Know?” boxes","Add extra, related information"],["Bulleted or numbered lists","Break information into steps or points"]]},
+{t:"table",h:"Text structures and signal words",intro:"Sections are often organized with a text structure. Signal words are your clues!",head:["Structure","Signal words","Question it answers"],
+rows:[["Chronological / sequence","first, next, then, finally, in 2023, after","What happened, in what order?"],
+["Cause and effect","because, so, as a result, therefore, causes, leads to","Why did it happen? What did it cause?"],
+["Compare and contrast","similarly, both, however, unlike, on the other hand","How are things alike or different?"],
+["Problem and solution","problem, challenge, one solution, to fix this","What is wrong, and how can it be fixed?"],
+["Description","for example, such as, features, includes","What is it like?"]]},
+{t:"steps",h:"Strategy: Preview → Purpose → Payoff",steps:[
+["Preview the features.","Before reading, skim the title, headings, pictures, captions, and boxes. What will you learn?"],
+["Find the purpose of the part.","Ask: What job is this section or feature doing? Look for signal words to name the structure."],
+["Explain the payoff.","Finish the sentence: “This part helps the reader understand ___ by ___.”"],
+["Connect to the whole.","How does this part support the author’s central idea?"]]},
+{t:"example",h:"Watch it work",text:`<b>Heading: Why Do Leaves Change Color?</b><br>Leaves are green because of chlorophyll, which helps plants make food. In fall, days grow shorter. As a result, trees stop making chlorophyll, so the green fades and the hidden yellow and orange colors show through.<br><br><i>Caption: A maple leaf turning from green to orange in October.</i>`,
+think:["<b>Heading:</b> It’s a question, so this section will answer “why.”","<b>Signal words:</b> “As a result” and “so” show a <b>cause-and-effect</b> structure.","<b>Caption:</b> It connects the photo to the explanation, so the reader can SEE the change being described.","<b>Payoff:</b> The section helps the reader understand WHY leaves change color by explaining the cause (shorter days) and the effect (green fades)."]},
+{t:"check",h:"Quick Check",q:"In the leaf example, what is the main job of the caption?",
+opts:["It explains what the photo shows so readers can connect it to the text.","It gives the main idea of the whole article.","It lists the steps for making chlorophyll.","It persuades readers to visit a forest in October."],
+miss:{1:"A caption only explains one picture. The heading and the text carry the main idea.",2:"The caption doesn’t list steps. It describes the photo.",3:"The caption isn’t trying to convince anyone. It explains the image."},
+why:"Captions explain what a picture shows and connect it to the information in the text."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Describing WHAT a feature is instead of what it DOES.","Don’t just say “It’s a diagram.” Say how it helps: “It shows the parts of…”"],
+["Assuming a heading is the central idea of the whole text.","A heading covers ONE section. The title and the whole text show the central idea."],
+["Ignoring sidebars and captions.","FAST questions often ask about them. Read EVERY feature!"],
+["Guessing the structure without signal words.","Hunt for clue words like “because,” “first,” or “however” before choosing."],
+["Choosing an answer about a different section.","Make sure your answer matches the specific section the question names."]]}
+],
+passage:{title:"Rescue Mission Under the Sea",html:`<p><span class="pn">1</span>Off the coast of the Florida Keys lies one of the largest coral reef systems in the world. These reefs are home to sea turtles, parrotfish, and thousands of other creatures. But Florida’s reefs are in trouble, and scientists are racing to save them.</p>
+<h4>What Is Coral Bleaching?</h4>
+<p><span class="pn">2</span>Corals may look like rocks, but they are living animals. Tiny algae live inside them and give them food and bright colors. When ocean water gets too hot, the corals become stressed. As a result, they push the algae out. Without the algae, the corals turn white, or “bleach.” Because they have lost their main food source, bleached corals can starve and die if the water does not cool down.</p>
+<h4>A Race Against Time</h4>
+<p><span class="pn">3</span>In the summer of 2023, ocean water near the Florida Keys became hotter than scientists had ever recorded there. In some shallow spots, the water was warmer than a hot tub. First, divers noticed corals turning pale in July. Next, whole sections of reef began to bleach. Then scientists made a bold decision: they lifted thousands of young corals out of the ocean and moved them into cool tanks on land until the heat wave passed.</p>
+<div class="callout gold" style="font-family:Nunito"><b>📌 Did You Know?</b> Coral reefs cover less than 1 percent of the ocean floor, yet they are home to about one-quarter of all ocean species.</div>
+<h4>Coral Nurseries: A Possible Solution</h4>
+<p><span class="pn">4</span>One problem is that corals grow very slowly. To speed things up, scientists build underwater “nurseries.” They hang small pieces of coral on frames shaped like trees. The pieces grow quickly because they get plenty of sunlight and moving water. When the corals are big enough, divers carefully attach them to damaged reefs.</p>
+<figure style="margin:10px 0;text-align:center"><svg viewBox="0 0 220 150" width="220" role="img" aria-label="Diagram of a coral tree"><rect width="220" height="150" rx="10" fill="#bfe9f5"/><rect x="0" y="130" width="220" height="20" fill="#e8d6a8"/><rect x="106" y="20" width="8" height="112" fill="#f4f4f4" stroke="#8aa" /><rect x="50" y="40" width="120" height="6" fill="#f4f4f4" stroke="#8aa"/><rect x="40" y="75" width="140" height="6" fill="#f4f4f4" stroke="#8aa"/><rect x="60" y="108" width="100" height="6" fill="#f4f4f4" stroke="#8aa"/><g fill="#ff8c69"><circle cx="62" cy="54" r="6"/><circle cx="92" cy="54" r="6"/><circle cx="130" cy="54" r="6"/><circle cx="158" cy="54" r="6"/><circle cx="52" cy="89" r="6"/><circle cx="84" cy="89" r="6"/><circle cx="138" cy="89" r="6"/><circle cx="170" cy="89" r="6"/><circle cx="74" cy="122" r="6"/><circle cx="146" cy="122" r="6"/></g><g stroke="#557" stroke-width="1"><line x1="62" y1="46" x2="62" y2="48"/><line x1="92" y1="46" x2="92" y2="48"/><line x1="130" y1="46" x2="130" y2="48"/><line x1="158" y1="46" x2="158" y2="48"/></g></svg>
+<figcaption style="font-family:Nunito;font-size:15px;color:#4a5578"><b>Figure 1:</b> A coral “tree” in an underwater nursery. Small pieces of coral hang from the branches like ornaments while they grow.</figcaption></figure>
+<p><span class="pn">5</span>Saving Florida’s reefs will not be easy. But with nurseries, careful planning, and a lot of hard work, scientists hope that these underwater cities will be full of color again.</p>`},
+questions:[
+{dok:1,q:"Which text feature tells the reader that a section will explain how scientists are trying to fix the problem?",
+opts:["The heading “Coral Nurseries: A Possible Solution”","The “Did You Know?” box in the middle of the article","The heading “What Is Coral Bleaching?”","The title “Rescue Mission Under the Sea”"],
+miss:{1:"The box gives an extra fact about why reefs matter. It doesn’t introduce a solution.",2:"That heading introduces an explanation of the PROBLEM, not the solution.",3:"The title covers the whole article. The question asks about one section."},
+hint:"Look for a heading with a “solution” signal word.",why:"The word “Solution” in the heading signals that this section will explain how scientists are fixing the problem."},
+{dok:1,q:"What is the main purpose of the “Did You Know?” box?",
+opts:["To add an extra fact that shows why coral reefs are so important","To explain how coral bleaching happens","To tell the events of 2023 in time order","To give readers the steps for building their own coral nursery"],
+miss:{1:"Bleaching is explained in paragraph 2, not in the box.",2:"The time-order events are in paragraph 3.",3:"The nursery steps are in paragraph 4."},
+hint:"Sidebars usually add bonus information. What does this fact tell you about reefs?",why:"The box adds a surprising fact (reefs are tiny but home to about a quarter of ocean species), which shows why saving them matters."},
+{dok:2,q:"Which text structure does the author use in the section “What Is Coral Bleaching?”",
+opts:["Cause and effect","Compare and contrast","Chronological order","Problem and solution"],
+miss:{1:"The section explains one process. It doesn’t compare two things. Look for signal words like “as a result” and “because.”",2:"There are no dates or time-order steps in this section. That structure appears in “A Race Against Time.”",3:"Solutions aren’t discussed in this section. Read the signal words again."},
+hint:"Find the signal words “As a result” and “Because.”",why:"Hot water CAUSES stress; as a result, corals push out algae; because they lose food, they can die. That chain is cause and effect."},
+{dok:2,q:"How does Figure 1 help the reader understand the section “Coral Nurseries: A Possible Solution”?",
+opts:["It shows what a coral tree looks like, so readers can picture coral pieces hanging on frames.","It proves that hot ocean water is the main cause of coral bleaching.","It shows the events of the 2023 heat wave in the order that they happened, month by month.","It tells readers how many ocean species live on coral reefs."],
+miss:{1:"The diagram doesn’t show heat or bleaching. It shows a nursery frame.",2:"A timeline would show events in order. Figure 1 is a diagram of a nursery.",3:"That fact is in the “Did You Know?” box, not in the figure."},
+hint:"Read the caption. What does it help you SEE?",why:"The diagram and caption let readers picture the “tree” frames described in paragraph 4, with coral pieces hanging “like ornaments.”"},
+{dok:3,q:"How does the section “A Race Against Time” contribute to the article as a whole?",
+opts:["Its events in time order show how urgent the problem became, setting up the need for solutions.","It shows that coral bleaching is only a small problem that will probably fix itself over time.","It introduces a brand-new topic that is not connected to coral reefs at all.","It defines the key vocabulary words for the article."],
+miss:{1:"Scientists moved thousands of corals out of the ocean! The section shows the problem is VERY serious.",2:"The section stays on the topic of reefs and the 2023 heat wave.",3:"Key terms like “bleach” are defined in paragraph 2. This section tells events in order."},
+hint:"Think about the heading. Why is it a “race”? How does that connect to the next section?",why:"The sequence (pale corals, then bleaching, then emergency rescue) builds urgency, which sets up the need for the solution in the next section."},
+{dok:3,q:"Why did the author most likely organize the article by explaining the problem before the solution?",
+opts:["So readers understand the danger first, which makes the solution more meaningful and hopeful","So readers will stay confused and keep reading until the very end","Because the sections are arranged in alphabetical order by heading","To argue that scientists are the ones who caused the coral bleaching in the Florida Keys"],
+miss:{1:"Authors organize texts to make them CLEARER, not more confusing.",2:"The headings are not in alphabetical order. Look at what each section does.",3:"The article says hot water causes bleaching. Scientists are the ones helping."},
+hint:"Would the nursery section make sense if you didn’t know about bleaching yet?",why:"A problem-to-solution order helps readers understand WHY nurseries are needed, so the ending feels hopeful instead of random."}
+]},
+
+/* ================= LOCK 2: R.2.2 ================= */
+{id:"r22",code:"ELA.6.R.2.2",icon:"🧭",name:"Central Idea Compass",skill:"How a central idea is developed throughout a text",
+remember:"Central idea = topic + the author’s main point about it, covering the WHOLE text. Then track how each part (intro, body, conclusion) builds that point.",
+lesson:[
+{t:"big",h:"The central idea is the text’s main point",body:`<p class="big">The <b>central idea</b> is the most important point the author makes about the topic. It is what the WHOLE text is mostly about.</p>
+<ul><li><b>Explicit</b> central idea: stated directly in a sentence, often in the introduction or conclusion.</li><li><b>Implied</b> central idea: not stated in one sentence. You put it together from the details.</li></ul>
+<p>Authors <b>develop</b> a central idea, building it step by step with <b>supporting details</b>: facts, examples, expert quotes, research, and explanations.</p>
+<div class="callout">🧭 The FAST will ask you to (1) find the central idea, (2) pick details that support it, and (3) explain <b>how</b> it’s developed across the text.</div>`},
+{t:"table",h:"Topic vs. central idea vs. detail",head:["Type","Example (article about sleep)"],
+rows:[["Topic (1–3 words)","Sleep"],["Central idea (a full sentence about the WHOLE text)","Getting enough sleep helps students learn, stay healthy, and manage their emotions."],["Supporting detail (one piece of evidence)","Students who sleep 9 hours remember more vocabulary words."]],
+after:`<div class="callout gold">🔑 <b>Test it:</b> Could each section of the text fit under this sentence like an umbrella? If yes, it’s the central idea. If it only covers one paragraph, it’s a detail.</div>`},
+{t:"terms",h:"Key words to know",items:[
+["Central idea","The most important point the whole text makes about the topic.","🧭"],
+["Topic","What the text is about in a word or two.","🏷️"],
+["Explicit","Stated directly in the text.","📢"],
+["Implied","Suggested by details but not stated directly.","🔍"],
+["Supporting detail","A fact, example, or quote that backs up the central idea.","🧱"],
+["Develop","To build an idea step by step throughout a text.","📈"]]},
+{t:"steps",h:"Strategy: The Umbrella Method",steps:[
+["Name the topic.","What is the whole text about in a few words?"],
+["Ask what the author SAYS about it.","What point keeps coming back? Check the title, the introduction, and the conclusion."],
+["Do the umbrella test.","Does your sentence cover EVERY section? If not, make it bigger. If it’s too general, make it more specific."],
+["Track the development.","For each section, ask: What does this part add? (an explanation, evidence, an example, a warning, a call to action)"]]},
+{t:"example",h:"Watch it work",text:`<b>Why Bees Matter</b><br>(1) Many people swat at bees, but these insects are among our most important neighbors. (2) Bees carry pollen from flower to flower, which helps plants make fruits and seeds. (3) In fact, many crops, such as apples, blueberries, and almonds, depend on bees and other pollinators. (4) Without bees, grocery stores would have far fewer fruits and vegetables.`,
+think:["<b>Topic:</b> Bees","<b>Explicit central idea:</b> Sentence 1. Bees are “among our most important neighbors.”","<b>Development:</b> Sentence 2 explains HOW bees help (pollen). Sentence 3 gives EXAMPLES (crops). Sentence 4 shows the EFFECT on people.","<b>Umbrella test:</b> Every sentence fits under “Bees are very important.” ✅"]},
+{t:"check",h:"Quick Check",q:"In “Why Bees Matter,” how does sentence 3 develop the central idea?",
+opts:["It gives examples of crops that depend on bees.","It states the central idea for the first time.","It describes what bees look like.","It argues that people should stop eating apples."],
+miss:{1:"The central idea is stated in sentence 1. Sentence 3 supports it.",2:"There’s no description of what bees look like in this paragraph.",3:"The text never argues that. Stay with the evidence."},
+why:"Sentence 3 adds specific examples (apples, blueberries, almonds) that prove bees are important."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Picking an interesting detail as the central idea.","Details support the central idea. Use the umbrella test: does it cover the WHOLE text?"],
+["Picking an answer that is too broad.","“Insects are interesting” is too big. The central idea should match what THIS text says."],
+["Picking an answer that only covers the first paragraph.","Check the middle and the end too. The central idea runs through the whole text."],
+["Choosing an extreme answer (“never,” “all,” “always”).","Central ideas match the author’s actual words. Watch for answers that exaggerate."],
+["Confusing the central idea with the author’s purpose.","Purpose = WHY the author wrote it. Central idea = WHAT the main point is."]]}
+],
+passage:{title:"The Secret Power of Boredom",html:`<p><span class="pn">1</span>“I’m bored!” It might be the most common complaint of all time. When kids say it, many adults rush to fix the problem by handing over a tablet or turning on the TV. But boredom may actually be one of the best things that can happen to your brain.</p>
+<p><span class="pn">2</span>Boredom is not just an empty feeling. Scientists describe it as a signal, like a warning light on a car’s dashboard. It tells your brain that what you are doing right now isn’t interesting enough. That uncomfortable feeling pushes you to search for something new to do, think about, or create.</p>
+<p><span class="pn">3</span>Researchers in England tested this idea. In one well-known experiment, some people first completed a very dull task: copying numbers from a phone book. Then everyone was asked to think of as many uses as possible for a pair of plastic cups. The people who had done the boring task came up with more creative ideas than the people who had not.</p>
+<p><span class="pn">4</span>Why would this happen? When we are bored, our minds tend to wander and daydream. During daydreams, the brain connects ideas that don’t usually go together. A cardboard box becomes a spaceship. A stick becomes a magic wand. These unexpected connections are the building blocks of creativity.</p>
+<p><span class="pn">5</span>Today, however, many people never give boredom a chance. Screens can fill every empty minute: in the car, in line at the store, even during commercials. When a screen instantly takes away boredom, it may also take away the chance to invent, imagine, or solve a problem in a new way.</p>
+<p><span class="pn">6</span>So the next time you feel bored, don’t reach for a screen right away. Build a fort, write a comic, or invent a new game. That boring moment might be the start of something great.</p>`},
+questions:[
+{dok:1,q:"Which statement best expresses the central idea of the article?",
+opts:["Boredom can be helpful because it pushes people to be creative and find new ideas.","Kids should never be allowed to use screens because screens are harmful.","Boredom","In one experiment in England, people copied numbers from a phone book before a creativity test."],
+miss:{1:"Too extreme! The article says don’t reach for a screen “right away,” not “never.”",2:"That’s the topic. The central idea says something ABOUT boredom.",3:"That’s one supporting detail from paragraph 3, not the main point of the whole text."},
+hint:"Use the umbrella test. Which answer covers all six paragraphs?",why:"Every paragraph supports the idea that boredom is useful because it leads to creativity and new ideas."},
+{dok:1,q:"Which sentence from the article states the central idea most directly?",
+opts:["“But boredom may actually be one of the best things that can happen to your brain.”","“When kids say it, many adults rush to fix the problem by handing over a tablet or turning on the TV.”","“A stick becomes a magic wand.”","“Build a fort, write a comic, or invent a new game.”"],
+miss:{1:"This sentence describes how adults react to boredom. It doesn’t state the author’s main point.",2:"This is an example of a daydream, a supporting detail.",3:"These are suggestions in the conclusion. They support the idea but don’t state it."},
+hint:"Explicit central ideas are often near the end of the introduction.",why:"This sentence directly states the author’s main point that boredom can be good for you."},
+{dok:2,q:"How does paragraph 2 help develop the central idea?",
+opts:["It explains that boredom is a signal pushing people to find something new, showing why it can be useful.","It gives research evidence from an experiment that was done with people in England.","It warns readers that spending too much time on screens can take away their chances to be creative.","It tells readers exactly what they should do the next time they start to feel bored."],
+miss:{1:"The experiment is in paragraph 3.",2:"The screen warning is in paragraph 5.",3:"The call to action is in paragraph 6, the conclusion."},
+hint:"Paragraph 2 compares boredom to something on a car. What does that comparison explain?",why:"Paragraph 2 explains WHAT boredom is (a signal that pushes us to search for something new). That gives the foundation for the rest of the argument."},
+{dok:2,q:"Which detail BEST supports the idea that boredom can lead to creativity?",
+opts:["People who did the boring task came up with more creative ideas for using plastic cups.","Many adults rush to hand kids a tablet or turn on the TV when the kids are bored.","Screens can fill every empty minute in the car or in line at the store.","Boredom might be the single most common complaint that people have ever made."],
+miss:{1:"This shows how people REACT to boredom, not that boredom leads to creativity.",2:"This shows the problem with screens. It doesn’t prove boredom helps creativity.",3:"This is just a hook. It doesn’t give evidence about creativity."},
+hint:"Look for evidence: research or results.",why:"The experiment’s results directly show a link between doing something boring and being more creative."},
+{dok:3,q:"Which choice best describes how the author develops the central idea throughout the article?",
+opts:["It moves from a surprising claim to an explanation, research evidence, a warning, and a call to action.","The author tells the story of one bored child from the beginning of the day to the end, in time order.","The author compares how people experience boredom in many different countries.","The author lists rules that parents must follow when their children say they are bored."],
+miss:{1:"There is no single character’s story. The article is informational.",2:"Only England is mentioned, and there is no country-by-country comparison.",3:"There are no rules for parents. The ending speaks to “you,” the reader."},
+hint:"Name the job of each paragraph in order.",why:"This answer matches the job of each paragraph: claim (1), explanation (2), evidence (3–4), warning (5), and call to action (6)."},
+{dok:3,q:"Which detail, if added to the article, would BEST further develop the central idea?",
+opts:["A student explains how she invented a board game during a long, boring car trip","A chart that shows the average price of a new tablet in different stores","A paragraph that explains when phone books were first printed","A sentence that says some people are afraid of spiders and snakes"],
+miss:{1:"Tablet prices have nothing to do with boredom leading to creativity.",2:"The history of phone books is off-topic. The phone book was just part of the experiment.",3:"Fear of spiders is unrelated to the central idea."},
+hint:"Which detail is another EXAMPLE of boredom leading to something creative?",why:"A real example of boredom sparking an invention adds new evidence that supports the central idea."}
+]},
+
+/* ================= LOCK 3: R.2.3 ================= */
+{id:"r23",code:"ELA.6.R.2.3",icon:"🕵️",name:"Purpose Detective",skill:"Authors’ purposes in different accounts of the same event",
+remember:"Same event, different purpose = different details, word choice, and tone. Ask: Who wrote it? What kind of text is it? What details did they include or leave out, and WHY?",
+lesson:[
+{t:"big",h:"Same event, different stories",body:`<p class="big">When two people write about the <b>same event</b>, their accounts can be very different, and that’s because they have different <b>purposes</b>.</p>
+<p>An <b>author’s purpose</b> is the reason the author wrote the text:</p>
+<ul><li><b>To inform or explain:</b> give facts and information</li><li><b>To persuade:</b> convince the reader to think or do something</li><li><b>To entertain:</b> tell an enjoyable story</li><li><b>To express or describe a personal experience:</b> share feelings and memories</li></ul>
+<p>A reporter, a person who was there, and a company trying to sell something might all describe the same event, but each chooses different <b>details</b>, <b>words</b>, and <b>tone</b> to fit their purpose.</p>`},
+{t:"table",h:"Firsthand vs. secondhand accounts",head:["","Firsthand account","Secondhand account"],
+rows:[["Who writes it?","Someone who was there","Someone who was NOT there or is reporting on it"],
+["Examples","Diary, letter, blog, autobiography, interview","News article, encyclopedia, textbook, biography"],
+["Clue words","I, me, we, my","he, she, they, reports, according to"],
+["Usually includes","Feelings, senses, personal details","Facts, numbers, quotes from others, background"]]},
+{t:"terms",h:"Key words to know",items:[
+["Author’s purpose","The reason an author writes a text.","🎯"],
+["Account","A description or report of an event.","📰"],
+["Firsthand account","Written by someone who experienced the event.","🙋"],
+["Secondhand account","Written by someone who learned about the event from others.","📚"],
+["Tone","The author’s attitude toward the topic (excited, serious, angry).","🎚️"],
+["Word choice","The specific words an author picks to create an effect.","✏️"]]},
+{t:"steps",h:"Strategy: Investigate each account",steps:[
+["Identify the author and text type.","Is it a news article, journal, speech, advertisement? Firsthand or secondhand?"],
+["Collect the details.","What does each author include? What does each one leave out?"],
+["Examine word choice and tone.","Facts and numbers? Emotional words? Exciting words?"],
+["Name each purpose.","Inform, persuade, entertain, or express?"],
+["Explain the difference.","“Author A includes ___ because their purpose is ___, while Author B…”"]]},
+{t:"example",h:"Watch it work",text:`<b>Account 1 (school newsletter):</b> The new library opened on March 3. It has 4,000 books, 20 computers, and a reading garden.<br><br><b>Account 2 (student journal):</b> I walked into the new library and actually gasped. The reading garden smelled like rain and roses. I found a book I’ve wanted for two years!`,
+think:["<b>Account 1:</b> Secondhand. Facts, numbers, and a date. Purpose: <b>to inform</b>.","<b>Account 2:</b> Firsthand (“I”). Senses and feelings like “gasped” and “smelled like rain.” Purpose: <b>to express a personal experience</b>.","<b>Why different?</b> The newsletter wants readers to know the facts. The student wants to share how it felt."]},
+{t:"check",h:"Quick Check",q:"Why does Account 2 include the detail that the garden “smelled like rain and roses”?",
+opts:["Because the author’s purpose is to share a personal experience and feelings","Because the author’s purpose is to give exact facts and numbers","Because the author wants to sell roses","Because the author was not at the library"],
+miss:{1:"Exact facts and numbers are in Account 1, the newsletter.",2:"Nothing in the text tries to sell anything.",3:"The author uses “I walked in,” so they WERE there. It’s firsthand."},
+why:"Sensory details and emotions fit a purpose of expressing a personal experience."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Thinking one account must be “wrong.”","Both can be accurate! They just include different details for different purposes."],
+["Choosing “to inform” for every nonfiction text.","Blogs, speeches, and ads often aim to persuade or express feelings."],
+["Ignoring what an author LEAVES OUT.","Missing details are clues to purpose too."],
+["Forgetting to look at word choice.","Emotional words (“amazing,” “gross”) signal a personal or persuasive purpose."],
+["Mixing up firsthand and secondhand.","Firsthand = the author was there (I, we). Secondhand = reported by someone else."]]}
+],
+passage:[
+{title:"Account 1: Volunteers Pull Two Tons of Trash from Lake Willow",by:"News article from the <i>Willow Springs Weekly</i>",html:`<p><span class="pn">1</span>About 140 volunteers gathered at Lake Willow on Saturday morning for the city’s fall shoreline cleanup. Over four hours, they collected about 4,200 pounds of trash, more than two tons, according to the Lake Willow Neighborhood Association, which organized the event.</p>
+<p><span class="pn">2</span>The city provided gloves, trash grabbers, and bags. Volunteers found plastic bottles, food wrappers, and even a rusty shopping cart. Association president Dana Kim said the most dangerous item was old fishing line, which can tangle and injure birds and turtles.</p>
+<p><span class="pn">3</span>“The lake belongs to everyone, so keeping it clean is everyone’s job,” Kim said. The next cleanup is scheduled for March.</p>`},
+{title:"Account 2: My Muddiest Saturday Ever",by:"Blog post by Carlos, a sixth grader",html:`<p><span class="pn">1</span>I’ll be honest: when my mom signed us up for the Lake Willow cleanup, I wanted to stay in bed. By 9:00 a.m. I was sweaty, my sneakers were soaked, and I had just pulled a slimy, gross shopping cart out of the mud with three other kids. It was disgusting. It was also kind of awesome.</p>
+<p><span class="pn">2</span>Then I saw something I will never forget. A great blue heron was standing in the reeds with fishing line wrapped around its leg. It kept trying to fly, but it couldn’t. A wildlife officer waded in, gently cut the line, and the heron flapped away over the water. Everybody cheered.</p>
+<p><span class="pn">3</span>That was the proudest I have ever felt picking up trash. If you live near Lake Willow, come to the next cleanup. Bring old shoes. Trust me, you’ll need them, and you’ll be glad you came.</p>`}],
+questions:[
+{dok:1,q:"What is the main purpose of Account 1?",
+opts:["To inform readers about the facts of the cleanup","To entertain readers with a funny story about mud","To persuade readers to go fishing at Lake Willow","To describe the author’s personal feelings about the cleanup"],
+miss:{1:"The funny, muddy story is Carlos’s blog. Account 1 sticks to facts.",2:"Account 1 warns that fishing line is dangerous. It doesn’t encourage fishing.",3:"Account 1 doesn’t use “I” or share feelings. It reports facts and quotes."},
+hint:"Look at the kinds of details: numbers, dates, quotes from an organizer.",why:"A news article with numbers, the organizer’s name, and a quote is written to inform."},
+{dok:1,q:"Which detail appears in BOTH accounts?",
+opts:["Fishing line can harm wildlife.","Volunteers collected about 4,200 pounds of trash.","The city provided gloves and trash grabbers.","A wildlife officer freed a heron."],
+miss:{1:"The exact weight appears only in Account 1.",2:"Only Account 1 mentions the supplies from the city.",3:"Only Carlos describes the heron."},
+hint:"Check each answer in BOTH texts.",why:"Account 1 says fishing line “can tangle and injure birds,” and Account 2 shows a heron tangled in fishing line."},
+{dok:2,q:"How does Carlos’s word choice reveal his purpose?",
+opts:["Emotional words like “gross,” “awesome,” and “proudest” share his personal experience.","He uses exact numbers, dates, and measurements to report the facts of the event.","He quotes the president of the Neighborhood Association.","He uses formal, serious language like a news reporter."],
+miss:{1:"That describes Account 1. Carlos uses few numbers.",2:"The quote from Dana Kim is in Account 1.",3:"Carlos writes casually: “I’ll be honest,” “Trust me.”"},
+hint:"Find emotional words in Account 2.",why:"His emotional, casual words show he is expressing his personal experience (and later, persuading others to come)."},
+{dok:2,q:"Why does Carlos most likely include the story about the heron?",
+opts:["To make readers care about the cleanup by showing a powerful moment of why it matters","To give statistics about how many birds live at the lake","To prove that the news article left out important facts about the heron on purpose","To explain to readers how to use a trash grabber safely at a cleanup"],
+miss:{1:"Carlos gives no statistics. He tells one memorable moment.",2:"There’s no evidence the reporter left anything out on purpose. They had a different purpose.",3:"Trash grabbers aren’t part of the heron story."},
+hint:"How did you feel reading about the heron? That’s the author’s goal.",why:"The vivid rescue scene creates emotion, which supports Carlos’s purpose of sharing why the day mattered and convincing others to join."},
+{dok:3,q:"Which statement best explains why the two accounts include different details about the same event?",
+opts:["The reporter informs with numbers and quotes; Carlos shares his experience and urges others to join with feelings.","One of the accounts must be incorrect, because the two authors do not include the same details or numbers.","The reporter was not interested in the cleanup, so she left out the most exciting moments.","Both authors have exactly the same purpose, so they just chose their details at random."],
+miss:{1:"The accounts don’t contradict each other. They focus on different details for different purposes.",2:"There is no evidence of this. The article reports the event carefully.",3:"Their purposes differ: one informs, and one expresses and persuades."},
+hint:"Connect each author’s details to their purpose.",why:"Each author selects details that fit their purpose: facts to inform, and personal moments to express feelings and persuade."},
+{dok:3,q:"Carlos ends with “come to the next cleanup… you’ll be glad you came.” What does this ending show about his purpose compared to the news article?",
+opts:["Carlos also wants to persuade readers to take action, while the article mainly reports information.","Carlos wants to inform readers about the exact date and time of the next cleanup at the lake.","Both authors end their texts by trying to sell gloves and trash bags to readers.","Carlos wants to entertain readers by making up a story."],
+miss:{1:"Carlos never gives the date. Only the article says “March.”",2:"Neither author is selling anything.",3:"Carlos describes a real event he attended. It’s firsthand, not made up."},
+hint:"Who is Carlos talking to at the end? What does he want them to DO?",why:"His direct call to action (“come to the next cleanup”) adds a persuasive purpose. The article only reports the next date."}
+]},
+
+/* ================= LOCK 4: R.2.4 ================= */
+{id:"r24",code:"ELA.6.R.2.4",icon:"🏗️",name:"Argument Architect",skill:"Tracking an argument and the types of reasoning",
+remember:"Track the blueprint: claim → reasons → evidence → counterclaim and rebuttal → conclusion. Name the reasoning: inductive (examples → conclusion), deductive (rule → conclusion), cause-and-effect, or comparison.",
+lesson:[
+{t:"big",h:"An argument is built like a building",body:`<p class="big">An <b>argument</b> is a text that tries to convince readers to agree with a <b>claim</b>.</p>
+<p>Strong arguments have parts that work together like a building:</p>
+<ul><li>🏁 <b>Claim:</b> the author’s position (the roof everything holds up)</li><li>🧱 <b>Reasons:</b> why the author believes the claim (the walls)</li><li>🔩 <b>Evidence:</b> facts, statistics, examples, and expert quotes that prove each reason (the bolts)</li><li>🛡️ <b>Counterclaim &amp; rebuttal:</b> the other side, and why the author still disagrees (the storm shield)</li></ul>
+<div class="callout">🏗️ <b>Tracking</b> an argument means following how it is built from start to finish and noticing <b>what kind of reasoning</b> connects the evidence to the claim.</div>`},
+{t:"table",h:"Types of reasoning",intro:"Reasoning is the THINKING that connects evidence to a claim.",head:["Type","How it works","Example"],
+rows:[["<b>Inductive</b>","Specific examples → general conclusion","“Three schools added recess, and all three saw better focus. Recess helps students focus.”"],
+["<b>Deductive</b>","General rule → specific conclusion","“All living things need water. Plants are living things. So plants need water.”"],
+["<b>Cause and effect</b>","One thing leads to another","“Because the library extended its hours, more students finished their projects.”"],
+["<b>Comparison / analogy</b>","Compares the situation to something similar","“Skipping practice before a test is like a team skipping practice before a big game.”"]],
+after:`<div class="callout gold">🧠 <b>Memory trick:</b> <b>IN</b>ductive builds <b>IN</b> from small examples to a big idea. <b>DE</b>ductive starts with a big rule and goes <b>DE</b>ep into one case.</div>`},
+{t:"terms",h:"Key words to know",items:[
+["Claim","The author’s main position or argument.","🏁"],
+["Reason","A statement that explains why the claim is true.","🧱"],
+["Evidence","Facts, statistics, examples, or expert quotes that support a reason.","🔩"],
+["Counterclaim","The opposing side’s argument.","↔️"],
+["Rebuttal","The author’s response that argues against the counterclaim.","🛡️"],
+["Reasoning","The logic that connects the evidence to the claim.","🧠"]]},
+{t:"steps",h:"Strategy: Blueprint the argument",steps:[
+["Find the claim.","Usually in the introduction. What does the author want you to believe or do?"],
+["Box each reason.","Look for topic sentences: “First,” “Another reason,” “Also.”"],
+["Underline the evidence.","Which facts, numbers, examples, or quotes support each reason?"],
+["Spot the counterclaim.","Look for “Some people argue,” “Critics say,” “Others believe.” Then find the rebuttal (“However…”)."],
+["Name the reasoning.","Examples → conclusion? Rule → conclusion? Cause → effect? A comparison?"]]},
+{t:"example",h:"Watch it work",text:`(1) Our school should allow water bottles in class. (2) The human brain is about 75 percent water, and doctors agree that the brain works best when the body is hydrated. (3) Students are humans, so students think best when they can drink water. (4) Some teachers worry that bottles will spill. (5) However, bottles with screw-top lids rarely spill.`,
+think:["<b>Claim:</b> Sentence 1 says water bottles should be allowed.","<b>Evidence:</b> Sentence 2 gives a fact and expert agreement.","<b>Reasoning:</b> Sentences 2–3 use a general rule (brains work best hydrated), then apply it to students. That’s <b>deductive</b>.","<b>Counterclaim:</b> Sentence 4 (spills). <b>Rebuttal:</b> Sentence 5 (screw-top lids)."]},
+{t:"check",h:"Quick Check",q:"Which sentence in the water bottle example is the REBUTTAL?",
+opts:["Sentence 5: “However, bottles with screw-top lids rarely spill.”","Sentence 1: “Our school should allow water bottles in class.”","Sentence 4: “Some teachers worry that bottles will spill.”","Sentence 2: “The human brain is about 75 percent water…”"],
+miss:{1:"That’s the claim, the author’s main position.",2:"That’s the counterclaim, the other side’s worry. The rebuttal ANSWERS it.",3:"That’s evidence supporting the claim."},
+why:"The rebuttal responds to the counterclaim. “However” signals the author pushing back on the spill worry."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Confusing the claim with a reason.","The claim is the overall position. Reasons explain WHY."],
+["Thinking the counterclaim is the author’s opinion.","The counterclaim is the OTHER side. The author answers it with a rebuttal."],
+["Mixing up inductive and deductive.","Inductive = several examples lead to a conclusion. Deductive = a rule is applied to a case."],
+["Thinking any fact is good evidence.","Evidence must be RELEVANT, connected to the specific reason."],
+["Skipping the conclusion.","Conclusions often restate the claim and call readers to action."]]}
+],
+passage:{title:"Every Middle School Needs a Garden",html:`<p><span class="pn">1</span>Imagine walking past your classroom window and seeing tomatoes, sunflowers, and bean plants climbing toward the sky. Every middle school should have a student garden. Gardens help students learn, eat better, and work together.</p>
+<p><span class="pn">2</span>First, gardens make science come alive. At Pine Ridge Middle School, students measure how fast bean plants grow in different kinds of soil. At Oak Grove Middle School, students test which fertilizer produces the biggest tomatoes. At Riverside Middle School, students track how much rain the garden gets each week. These examples show that gardens turn science lessons into real experiments.</p>
+<p><span class="pn">3</span>Second, gardens can lead to healthier eating. When students plant, water, and harvest vegetables themselves, they become curious about how those vegetables taste. As a result, students who grow food are often more willing to try new fruits and vegetables at lunch.</p>
+<p><span class="pn">4</span>Third, gardens are exactly the kind of learning students need. Education experts agree that students learn best through hands-on activities. Gardening is a hands-on activity from the first seed to the final harvest. Therefore, gardening is one of the best ways for students to learn.</p>
+<p><span class="pn">5</span>Some people argue that school gardens cost too much money and take too much time. However, many local garden centers donate seeds and tools to schools, and parent volunteers can help water plants over the summer. A garden club that meets once a week can take care of the daily work.</p>
+<p><span class="pn">6</span>A school garden grows much more than vegetables. It grows scientists, healthy eaters, and teammates. It’s time for every middle school to pick up a shovel and start digging.</p>`},
+questions:[
+{dok:1,q:"What is the author’s claim?",
+opts:["Every middle school should have a student garden.","Pine Ridge Middle School students measure bean plants.","School gardens cost too much money.","Tomatoes and sunflowers are easy to grow."],
+miss:{1:"That’s evidence for one reason, not the overall claim.",2:"That’s the counterclaim, the opposing view the author argues against.",3:"The author never says this. Look at the introduction."},
+hint:"The claim is the author’s overall position, usually in the introduction.",why:"Paragraph 1 states the position the whole argument supports: “Every middle school should have a student garden.”"},
+{dok:1,q:"Which sentence from the passage is the counterclaim?",
+opts:["“Some people argue that school gardens cost too much money and take too much time.”","“First, gardens make science come alive.”","“A school garden grows much more than vegetables.”","“Gardening is a hands-on activity from the first seed to the final harvest.”"],
+miss:{1:"That’s a reason that SUPPORTS the claim.",2:"That’s part of the conclusion, which restates the claim.",3:"That’s part of the author’s deductive reasoning."},
+hint:"Look for the signal words “Some people argue.”",why:"“Some people argue” introduces the opposing side, the counterclaim. The author then rebuts it with “However.”"},
+{dok:2,q:"What type of reasoning does the author use in paragraph 2?",
+opts:["Inductive reasoning: several specific examples lead to a general conclusion","Deductive reasoning: a general rule is applied to a specific case","Comparison reasoning: gardens are compared to sports teams","No reasoning at all, because the paragraph includes only the author’s opinions"],
+miss:{1:"Paragraph 2 doesn’t start with a rule. It starts with examples from three schools.",2:"There is no comparison to sports teams in the passage.",3:"The paragraph gives specific evidence from three schools, so it IS reasoning."},
+hint:"How many school examples are there? What does the last sentence do with them?",why:"Three specific school examples lead to the general conclusion that “gardens turn science lessons into real experiments.” That is inductive."},
+{dok:2,q:"What type of reasoning does the author use in paragraph 4?",
+opts:["Deductive reasoning","Inductive reasoning","Cause-and-effect reasoning","Reasoning by comparison"],
+miss:{1:"Paragraph 4 doesn’t list several examples. It starts with a general rule.",2:"Paragraph 3 uses cause and effect (“As a result”). Paragraph 4 applies a rule.",3:"Nothing is compared to something else in paragraph 4."},
+hint:"Rule → case → “Therefore…” Which reasoning does that match?",why:"General rule (students learn best hands-on) + case (gardening is hands-on) → conclusion (“Therefore…”). That is deductive."},
+{dok:3,q:"Which choice best describes how the author develops the argument?",
+opts:["The author states a claim, supports it with reasons and reasoning, rebuts a counterclaim, and calls for action.","The author tells a story about one student’s garden from the day it was planted to the final harvest.","The author presents both sides of the issue equally and then lets readers decide for themselves.","The author lists facts about plants without taking a position."],
+miss:{1:"The argument uses examples from three schools, not one student’s story.",2:"The author clearly takes a side and rebuts the opposing view.",3:"The author takes a strong position: every school should have a garden."},
+hint:"Track each paragraph’s job: claim, reasons, counterclaim, conclusion.",why:"This answer matches the full blueprint: claim (1), reasons (2–4), counterclaim and rebuttal (5), and call to action (6)."},
+{dok:3,q:"Which piece of evidence, if added, would BEST strengthen the reason in paragraph 3?",
+opts:["A survey showing students at a garden school ate more vegetables at lunch after the garden began","A description of the bright colors of the sunflowers growing in the school’s garden all year","A fact about how much a new shovel and a pair of garden gloves cost","The author’s opinion that gardens are pretty and make a school look nicer"],
+miss:{1:"Colors are a nice detail but don’t prove students eat healthier.",2:"Shovel prices relate to cost (paragraph 5), not healthy eating.",3:"An opinion isn’t evidence. Strong evidence is a fact, statistic, or example."},
+hint:"Paragraph 3 is about healthier eating. Which choice is relevant FACTUAL evidence about that?",why:"A survey about eating more vegetables is relevant, factual evidence that directly supports the healthy-eating reason."}
+]}
+]};
+
+</script>
+<script>
+(function(){
+"use strict";
+const T = window.TUTORIAL;
+const LOGO = window.LOGO_SRC || "";
+const KEY = "literacy-locksmith-fast6-" + T.id + "-v1";
+const $ = s => document.querySelector(s);
+const app = $("#app");
+document.documentElement.style.setProperty("--accent", T.theme.accent);
+document.documentElement.style.setProperty("--accent2", T.theme.accent2);
+document.documentElement.style.setProperty("--accentbg", T.theme.accentbg);
+
+/* ---------- autosave (stays on this iPad) ---------- */
+function fresh(){return {name:"",xp:0,streak:0,best:0,dok3:0,badges:[],locks:{},view:"home",lock:null,step:"learn",sound:true,slow:false,vaultOpen:false};}
+function load(){try{const r=localStorage.getItem(KEY);if(!r)return null;return Object.assign(fresh(),JSON.parse(r));}catch(e){return null;}}
+let S = load() || fresh();
+let savedTimer=null;
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+  const el=$("#saved"); if(el){el.classList.add("on");clearTimeout(savedTimer);savedTimer=setTimeout(()=>el.classList.remove("on"),1600);}
+}
+function LS(id){return S.locks[id]||(S.locks[id]={card:0,learned:false,q:0,ans:{},tc:{},done:false,key:null,first:0,retake:false,noHint:true});}
+function lockById(id){return T.locks.find(l=>l.id===id);}
+
+/* ---------- helpers ---------- */
+function hash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function order(seed,n){const a=[...Array(n).keys()];let h=hash(seed);for(let i=n-1;i>0;i--){h=Math.imul(h^(h>>>15),2246822507)>>>0;h=(h+0x9e3779b9)>>>0;const j=h%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+const LET="ABCD";
+const LEVELS=[[0,"Key Finder"],[100,"Apprentice Locksmith"],[250,"Junior Locksmith"],[450,"Locksmith"],[700,"Master Locksmith"],[1000,"Vault Legend"]];
+function level(){let i=0;LEVELS.forEach((l,k)=>{if(S.xp>=l[0])i=k;});const cur=LEVELS[i],nxt=LEVELS[i+1];const pct=nxt?Math.round((S.xp-cur[0])/(nxt[0]-cur[0])*100):100;return {name:cur[1],num:i+1,pct,next:nxt?nxt[0]:null};}
+const BADGES=[
+ ["first","🔑","First Key","Finish any lock"],
+ ["fire","🔥","On Fire","5 first-try answers in a row"],
+ ["solo","🧠","Solo Solver","Finish a lock with no Key Clues"],
+ ["flaw","💎","Flawless","Every answer right on the first try in a lock"],
+ ["owl","🦉","Deep Thinker","5 DOK 3 questions right on the first try"],
+ ["books","📚","Lesson Lover","Finish every lesson"],
+ ["gold3","🏆","Gold Collector","Earn 3 gold keys"],
+ ["vault","👑","Vault Master","Open the vault"]
+];
+const KEYCOL={gold:["#f5b70a","#ffe08a"],silver:["#9aa3b5","#e3e7ef"],bronze:["#c26a2c","#f2b98a"]};
+function keySVG(type,size){const c=type?KEYCOL[type]:["#c9cbd6","#eceef4"];size=size||40;
+ return `<svg width="${size}" height="${size}" viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="22" r="14" fill="${c[0]}" stroke="#16244f" stroke-width="3"/><circle cx="20" cy="22" r="6" fill="${c[1]}" stroke="#16244f" stroke-width="3"/><path d="M30 30 L54 54 M44 44 L50 38 M50 50 L56 44" stroke="#16244f" stroke-width="9" stroke-linecap="round"/><path d="M30 30 L54 54 M44 44 L50 38 M50 50 L56 44" stroke="${c[0]}" stroke-width="5" stroke-linecap="round"/></svg>`;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function toast(msg){const t=$("#toast");t.innerHTML=msg;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2600);}
+function addXP(n,why){if(n<=0)return;S.xp+=n;if(why)toast(`⭐ +${n} XP · ${why}`);}
+function award(id){if(S.badges.includes(id))return;S.badges.push(id);const b=BADGES.find(x=>x[0]===id);setTimeout(()=>{toast(`${b[1]} New badge: <b>${b[2]}</b>!`);sfx("key");},900);}
+
+/* ---------- sound effects ---------- */
+let AC=null;
+function sfx(type){if(!S.sound)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume();
+ const seq={good:[[660,0],[880,.09],[1320,.18]],bad:[[300,0],[240,.13]],key:[[523,0],[659,.1],[784,.2],[1047,.32]],tap:[[620,0]]}[type]||[];
+ seq.forEach(([f,t])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type==="bad"?"sine":"triangle";o.frequency.value=f;const st=AC.currentTime+t;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(type==="bad"?.08:.14,st+.02);g.gain.exponentialRampToValueAtTime(.0001,st+.2);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.22);});}catch(e){}}
+
+/* ---------- read aloud (Google US English voice) ---------- */
+const TTS={voice:null,btn:null,queue:[],
+ pick(){if(!("speechSynthesis" in window))return;const vs=speechSynthesis.getVoices();
+   this.voice=vs.find(v=>v.name==="Google US English")||vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Ava|Allison|Susan|Zira|Jenny|Aria|Nicky/i.test(v.name))||vs.find(v=>/en[-_]US/i.test(v.lang))||null;},
+ clean(t){return t
+   .replace(/ELA\.\d+\.[A-Z]+(\.\d+)*/g,"")
+   .replace(/\bDOK\s*\d\b/g,"")
+   .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{2190}-\u{21FF}\u{2300}-\u{23FF}]/gu,"")
+   .replace(/[•·▶→←]/g," ").replace(/\s+/g," ").trim();},
+ chunks(t){const parts=t.match(/[^.!?]+[.!?"”’)]*\s*/g)||[t];const out=[];let cur="";parts.forEach(p=>{if((cur+p).length>220&&cur){out.push(cur);cur=p;}else cur+=p;});if(cur.trim())out.push(cur);return out;},
+ stop(){try{speechSynthesis.cancel();}catch(e){}this.queue=[];if(this.btn){this.btn.classList.remove("on");this.btn.innerHTML=this.btn.dataset.label;}this.btn=null;},
+ speak(text,btn){
+   if(!("speechSynthesis" in window)){toast("Read-aloud is not available on this device.");return;}
+   const same=this.btn===btn&&btn;this.stop();if(same)return;
+   if(!this.voice)this.pick();
+   this.btn=btn;if(btn){btn.dataset.label=btn.dataset.label||btn.innerHTML;btn.classList.add("on");btn.innerHTML="⏹ Stop";}
+   this.queue=this.chunks(this.clean(text));this.next();},
+ next(){if(!this.queue.length){this.stop();return;}const u=new SpeechSynthesisUtterance(this.queue.shift());
+   if(this.voice){u.voice=this.voice;u.lang=this.voice.lang;}else u.lang="en-US";
+   u.rate=S.slow?0.8:0.95;u.pitch=1;u.onend=()=>{if(this.btn)this.next();};u.onerror=()=>this.stop();speechSynthesis.speak(u);}
+};
+if("speechSynthesis" in window){TTS.pick();speechSynthesis.onvoiceschanged=()=>TTS.pick();}
+function textOf(el){const c=el.cloneNode(true);c.querySelectorAll("[data-nosay]").forEach(x=>x.remove());c.querySelectorAll(".flip .front").forEach(x=>x.remove());c.querySelectorAll(".flip .back").forEach(x=>{x.style.display="block";});c.querySelectorAll("p,li,h3,h4,div,tr,td,th,br").forEach(x=>x.insertAdjacentText("afterend"," . "));return c.textContent.replace(/(\s*\.\s*){2,}/g,". ");}
+
+/* ---------- confetti ---------- */
+function confetti(n){n=n||170;const c=$("#confetti"),x=c.getContext("2d");const W=c.width=innerWidth,H=c.height=innerHeight;
+ const cols=["#f5b70a","#ff5fa2","#3ec1d3","#7b3fe4","#22c55e","#ff8c42","#2563eb"];
+ const ps=[...Array(n)].map((_,i)=>({x:Math.random()*W,y:-20-Math.random()*H*.6,vx:(Math.random()-.5)*5,vy:2+Math.random()*4,r:Math.random()*6.3,vr:(Math.random()-.5)*.35,w:7+Math.random()*7,h:9+Math.random()*9,c:cols[i%cols.length]}));
+ const t0=performance.now();(function f(t){x.clearRect(0,0,W,H);let alive=false;ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.r+=p.vr;if(p.y<H+30)alive=true;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});if(alive&&t-t0<6000)requestAnimationFrame(f);else x.clearRect(0,0,W,H);})(t0);}
+
+/* ---------- top bar ---------- */
+function keysEarned(){return T.locks.filter(l=>S.locks[l.id]&&S.locks[l.id].done).length;}
+function topbar(){const lv=level();
+ const logo=LOGO?`<img src="${LOGO}" alt="The Literacy Locksmith logo">`:`<div class="wordmark">The Literacy<b>LOCKSMITH</b></div>`;
+ return `<header class="top noprint"><div class="wrap">
+  <div class="brand">${logo}<div class="ttl">${esc(T.short)}</div></div>
+  <div class="stats">
+   <span class="saved" id="saved">✔ Saved on this iPad</span>
+   <span class="chip gold" title="Experience points">⭐ ${S.xp} XP</span>
+   <span class="chip" title="Keys earned">🔑 ${keysEarned()}/${T.locks.length}</span>
+   <span class="chip" title="First-try streak">🔥 ${S.streak}</span>
+   <button class="ibtn" data-act="slow" title="Read-aloud speed">${S.slow?"🐢 Slow":"🐇 Normal"}</button>
+   <button class="ibtn" data-act="sound" title="Sound effects">${S.sound?"🔔 On":"🔕 Off"}</button>
+  </div>
+  <div class="lvlrow"><span>Lv ${lv.num} · ${lv.name}</span><div class="xpbar"><i style="width:${lv.pct}%"></i></div><span>${lv.next?(lv.next-S.xp)+" XP to next level":"MAX LEVEL!"}</span></div>
+ </div></header>`;}
+function footer(){return `<footer class="noprint">🔐 The Literacy Locksmith · Created and copyrighted by Donna Rees<br>Aligned to the Florida B.E.S.T. ELA Standards, Grade 6 · ${esc(T.title)}<br><button data-act="reset">Teacher: reset this device</button></footer>`;}
+
+/* ---------- HOME ---------- */
+function home(){
+ const allDone=T.locks.every(l=>S.locks[l.id]&&S.locks[l.id].done);
+ const greet=S.name?`<p class="big"><b>Welcome back, ${esc(S.name)}!</b> Your progress is saved right here on this iPad. Pick a lock below to keep going.</p>`:
+ `<p>Type your first name so your certificate knows who you are:</p><div class="namebox"><input id="nm" maxlength="24" placeholder="First name" autocomplete="off"><button class="btn" data-act="name">Let's go! 🚀</button></div>`;
+ let h=`<section class="hero"><div class="card" id="intro"><span class="kicker">${esc(T.kicker)}</span><h1>${esc(T.title)}</h1>
+  <p>${T.intro}</p>${greet}
+  <div class="qtools" data-nosay><button class="say" data-say="#intro">🔊 Read to me</button></div></div>
+  <div class="card howto" id="how"><h3>🗝️ How to Unlock the Vault</h3><ul>
+   <li><span>📘</span><b>Learn It:</b> Read (or listen to) the lesson cards. Tap the flip cards and try the Quick Checks.</li>
+   <li><span>🎯</span><b>Prove It:</b> Answer FAST-style questions at DOK 1, 2, and 3.</li>
+   <li><span>🔧</span><b>Wrong answer?</b> You'll see WHY it's a trap, then try again. First try = 10 XP, second = 5, third = 2.</li>
+   <li><span>🔑</span><b>Key Clues</b> give a hint but cost 3 XP.</li>
+   <li><span>🥇</span>Earn a <b>gold, silver, or bronze key</b> for each lock. Collect them all to open the vault!</li>
+  </ul></div></section>`;
+ h+=`<div class="sect"><h2>🔒 The Locks</h2><span class="sub">${T.locks.length} skills in this category · tap any lock to start</span></div><div class="grid">`;
+ T.locks.forEach((l,i)=>{const st=S.locks[l.id];let pill=`<span class="pill new">New</span>`;
+  if(st&&st.done)pill=`<span class="pill done">Unlocked · ${st.key} key</span>`;else if(st&&(st.card>0||st.q>0||st.learned))pill=`<span class="pill go">In progress</span>`;
+  h+=`<button class="lockc" data-act="open" data-id="${l.id}"><span class="keyabs">${keySVG(st&&st.done?st.key:null,34)}</span><span class="ic">${l.icon}</span><span class="code">Lock ${i+1} · ${l.code}</span><h3>${esc(l.name)}</h3><span class="sk">${esc(l.skill)}</span><span class="st">${pill}</span></button>`;});
+ h+=`</div>`;
+ if(allDone)h+=`<div class="card vaultcta"><h2>🏦 Every lock is open!</h2><p>You collected all ${T.locks.length} keys. The vault is waiting...</p><button class="btn gold" data-act="vault">Open the Vault 🔓</button></div>`;
+ h+=`<div class="sect"><h2>🏅 Badges</h2><span class="sub">${S.badges.length}/${BADGES.length} earned</span></div><div class="badges">`;
+ BADGES.forEach(b=>{h+=`<div class="badge ${S.badges.includes(b[0])?"":"lock"}"><span class="e">${b[1]}</span><span>${b[2]}<small>${b[3]}</small></span></div>`;});
+ h+=`</div>`;return h;}
+
+/* ---------- LESSON ---------- */
+function cardHTML(c,l,ci){let b="";
+ switch(c.t){
+  case "big":b=c.body;break;
+  case "terms":b=`<p>${c.intro||"Tap each card to flip it and reveal the meaning."}</p><div class="terms">${c.items.map(t=>`<div class="term flip" data-act="flip"><div class="front">${t[2]||""} ${t[0]}<small>tap to flip</small></div><div class="back"><b>${t[0]}</b><span>${t[1]}</span></div></div>`).join("")}</div>`;break;
+  case "steps":b=(c.intro?`<p>${c.intro}</p>`:"")+`<ol class="stepl">${c.steps.map(s=>`<li><b>${s[0]}</b><br>${s[1]}</li>`).join("")}</ol>`+(c.after||"");break;
+  case "example":b=(c.intro?`<p>${c.intro}</p>`:"")+`<div class="ex">${c.text}</div><p><b>Watch how a strong reader thinks:</b></p><ul class="think">${c.think.map(x=>`<li><span>${x}</span></li>`).join("")}</ul>`+(c.after?`<div class="callout green">${c.after}</div>`:"");break;
+  case "watch":b=`<p>${c.intro||"These are the traps test makers love. Don't fall for them!"}</p>`+c.items.map(m=>`<div class="myth"><div class="m"><b>❌ TRAP</b>${m[0]}</div><div class="f"><b>✅ FIX</b>${m[1]}</div></div>`).join("");break;
+  case "table":b=(c.intro?`<p>${c.intro}</p>`:"")+`<div class="tablewrap"><table class="t"><tr>${c.head.map(x=>`<th>${x}</th>`).join("")}</tr>${c.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</table></div>`+(c.after||"");break;
+  case "check":{const st=LS(l.id).tc[ci]||{wrong:[],ok:false};const ord=order(l.id+"tc"+ci,c.opts.length);
+   b=(c.text?`<div class="ex">${c.text}</div>`:"")+`<p class="qtext">${c.q}</p><div class="opts">`+ord.map((o,i)=>{const cls=st.ok&&o===0?"right":st.wrong.includes(o)?"wrong":st.ok?"dim":"";return `<button class="opt ${cls}" data-act="tc" data-ci="${ci}" data-o="${o}"><span class="L">${LET[i]}</span><span>${c.opts[o]}</span></button>`;}).join("")+`</div>`;
+   if(st.ok)b+=`<div class="fb good"><h4>✅ Nice! ${st.wrong.length===0?"+5 XP":""}</h4>${c.why}</div>`;
+   else if(st.wrong.length){const last=st.wrong[st.wrong.length-1];b+=`<div class="fb bad"><h4>🔧 Not quite — fix the thinking</h4>${c.miss&&c.miss[last]?c.miss[last]:"Look back at the lesson and try again."}</div>`;}
+   break;}
+  default:b=c.body||"";}
+ return `<div class="card lcard" id="lc"><div class="chead"><span class="tag" data-nosay>${c.tag||({big:"Big Idea",terms:"Key Words",steps:"Strategy",example:"Model",watch:"Watch Out!",table:"Know It",check:"Quick Check"}[c.t]||"Lesson")}</span><h3>${c.h}</h3><button class="say" data-say="#lc" data-nosay>🔊 Read to me</button></div><div class="cbody">${b}</div></div>`;}
+function lockHead(l,step){const st=LS(l.id);
+ const s=(k,label,ok)=>`<button class="stp ${step===k?"on":ok?"ok":""}" data-act="step" data-k="${k}">${label}</button>`;
+ return `<div class="lockhead"><button class="btn ghost sm" data-act="home">← Locks</button><span class="ic">${l.icon}</span><div><h2>${esc(l.name)}</h2><div class="code">${l.code} · ${esc(l.skill)}</div></div>
+ <div class="steps">${s("learn","📘 Learn It",st.learned)}${s("practice","🎯 Prove It",st.done)}${st.done?s("result","🔑 My Key",true):""}</div></div>`;}
+function learn(l){const st=LS(l.id);const n=l.lesson.length;const ci=Math.min(st.card,n-1);const c=l.lesson[ci];
+ let h=lockHead(l,"learn")+cardHTML(c,l,ci);
+ h+=`<div class="navrow lcard"><button class="btn ghost" data-act="prev" ${ci===0?"disabled":""}>← Back</button><div class="dots">${l.lesson.map((_,i)=>`<span class="dot ${i===ci?"on":i<ci?"g":""}"></span>`).join("")}</div>`;
+ h+=ci<n-1?`<button class="btn" data-act="next">Next →</button>`:`<button class="btn gold" data-act="topractice">I'm ready! Prove It 🎯</button>`;
+ return h+`</div>`;}
+
+/* ---------- PRACTICE ---------- */
+function passageHTML(p){if(!p)return "";const arr=Array.isArray(p)?p:[p];
+ return arr.map(x=>`<h3>${x.title}</h3>${x.by?`<div class="src">${x.by}</div>`:""}<div class="ptext">${x.html}</div>`).join("<hr>");}
+function practice(l){const st=LS(l.id);const qs=l.questions;
+ if(st.q>=qs.length){S.step="result";return result(l);}
+ const qi=st.q,q=qs[qi];const a=st.ans[qi]||(st.ans[qi]={wrong:[],ok:false,hint:false,pts:0,rev:false});
+ const ord=order(l.id+"q"+qi,q.opts.length);
+ const P=q.passage||l.passage;
+ let h=lockHead(l,"practice");
+ h+=`<div class="prac ${P?"":"solo"}">`;
+ if(P)h+=`<div class="card passage" id="psg"><div class="qtop" data-nosay><span class="tag">📖 Read the text</span><button class="say" data-say="#psgt">🔊 Read passage</button></div><div id="psgt">${passageHTML(P)}</div></div>`;
+ h+=`<div class="card" id="qcard"><div class="qtop"><span class="qnum">Question ${qi+1} of ${qs.length}</span><span class="dok dok${q.dok}">DOK ${q.dok} · ${["","Recall","Skill & Concept","Strategic Thinking"][q.dok]}</span>${st.retake?`<span class="tag">Retake · no XP</span>`:""}</div>`;
+ if(q.excerpt)h+=`<div class="excerpt">${q.excerpt}</div>`;
+ h+=`<div class="qtext">${q.q}</div><div class="opts">`;
+ ord.forEach((o,i)=>{let cls="";if((a.ok||a.rev)&&o===0)cls="right";else if(a.wrong.includes(o))cls="wrong";else if(a.ok||a.rev)cls="dim";
+  h+=`<button class="opt ${cls}" data-act="ans" data-o="${o}"><span class="L">${a.wrong.includes(o)?"✖":(a.ok||a.rev)&&o===0?"✔":LET[i]}</span><span>${q.opts[o]}</span></button>`;});
+ h+=`</div>`;
+ if(a.ok||a.rev){
+  h+=`<div class="fb good"><div class="fbrow"><h4>${a.rev?"🔓 Here's the right answer":"✅ "+(a.wrong.length?"You fixed it!":["Correct!","Nailed it!","Yes! Sharp thinking!","Boom! Right on!"][qi%4])}</h4><span class="pts">${st.retake?"":"+"+a.pts+" XP"}</span></div><p><b>Why it's right:</b> ${q.why}</p></div>`;
+  h+=`<div class="navrow"><button class="linkbtn" data-act="step" data-k="learn">📘 Review the lesson</button><button class="btn" data-act="nextq">${qi<qs.length-1?"Next question →":"Finish & get my key 🔑"}</button></div>`;
+ }else{
+  if(a.wrong.length){const last=a.wrong[a.wrong.length-1];const tries=a.wrong.length;
+   h+=`<div class="fb bad"><h4>🔧 Not quite — let's fix the thinking</h4><p>${q.miss&&q.miss[last]?q.miss[last]:"Go back to the text and look for evidence."}</p><p><b>Try again!</b> This try is worth ${[10,5,2,0][Math.min(tries,3)]} XP.</p></div>`;}
+  if(a.hint)h+=`<div class="fb hint"><h4>🔑 Key Clue</h4>${q.hint}</div>`;
+  h+=`<div class="qtools" data-nosay>${a.hint?"":`<button class="hintbtn" data-act="hint">🔑 Key Clue (−3 XP)</button>`}<button class="say" data-act="sayq">🔊 Read question</button><button class="linkbtn" data-act="step" data-k="learn">📘 Review the lesson</button></div>`;
+ }
+ h+=`<div class="navrow"><span></span><div class="dots">${qs.map((_,i)=>{const x=st.ans[i];let c="";if(i===qi)c="on";else if(x&&x.ok&&!x.wrong.length)c="g";else if(x&&x.ok)c="y";else if(x&&x.rev)c="r";return `<span class="dot ${c}"></span>`;}).join("")}</div><span></span></div>`;
+ return h+`</div></div>`;}
+function sayQuestion(l,btn){const st=LS(l.id);const q=l.questions[st.q];const ord=order(l.id+"q"+st.q,q.opts.length);
+ const tmp=document.createElement("div");tmp.innerHTML=(q.excerpt?q.excerpt+" . ":"")+q.q;let t=tmp.textContent+". ";
+ ord.forEach((o,i)=>{const d=document.createElement("div");d.innerHTML=q.opts[o];t+=` Choice ${LET[i]}: ${d.textContent}. `;});TTS.speak(t,btn);}
+function answer(l,o){const st=LS(l.id);const qi=st.q,q=l.questions[qi];const a=st.ans[qi];if(a.ok||a.rev)return;
+ if(o===0){a.ok=true;const base=[10,5,2,0][Math.min(a.wrong.length,3)];a.pts=st.retake?0:Math.max(base-(a.hint&&base>0?3:0),base>0?1:0);
+  sfx("good");
+  if(!st.retake){S.xp+=a.pts;}
+  if(a.wrong.length===0){S.streak++;if(S.streak>S.best)S.best=S.streak;if(q.dok===3&&!st.retake){S.dok3++;if(S.dok3>=5)award("owl");}
+   if(S.streak>=5)award("fire");if(S.streak%3===0&&!st.retake){S.xp+=5;toast(`🔥 ${S.streak} in a row! Streak bonus +5 XP`);}
+   if(S.streak%3!==0&&!st.retake)toast(`⭐ +${a.pts} XP`);}
+  else{if(!st.retake)toast(`⭐ +${a.pts} XP · you fixed your thinking!`);}
+  if(a.wrong.length===0&&S.streak%3===0)confetti(70);
+ }else{a.wrong.push(o);S.streak=0;sfx("bad");
+  if(a.wrong.length>=q.opts.length-1){a.rev=true;a.pts=0;}}
+ save();render();
+ setTimeout(()=>{const f=document.querySelector(".fb");if(f)f.scrollIntoView({behavior:"smooth",block:"nearest"});},60);}
+
+/* ---------- RESULT ---------- */
+function finalize(l){const st=LS(l.id);const qs=l.questions;let first=0;qs.forEach((_,i)=>{const a=st.ans[i];if(a&&a.ok&&a.wrong.length===0)first++;});
+ const pct=first/qs.length;const key=pct>=.8?"gold":pct>=.5?"silver":"bronze";
+ const order3={bronze:1,silver:2,gold:3};
+ const hintUsed=qs.some((_,i)=>st.ans[i]&&st.ans[i].hint);
+ if(!st.done){st.done=true;st.key=key;st.first=first;addXP(20+(key==="gold"?10:0),"Lock unlocked!");}
+ else if(order3[key]>order3[st.key]){st.key=key;st.first=first;toast(`⬆️ Key upgraded to ${key}!`);} else if(first>st.first)st.first=first;
+ st.retake=false;
+ award("first");if(!hintUsed)award("solo");if(first===qs.length)award("flaw");
+ if(T.locks.filter(x=>S.locks[x.id]&&S.locks[x.id].key==="gold").length>=3)award("gold3");
+ st.lastFirst=first;st.lastKey=key;st.lastDok=[1,2,3].map(d=>{const idx=qs.map((q,i)=>i).filter(i=>qs[i].dok===d);return [idx.filter(i=>st.ans[i]&&st.ans[i].ok&&!st.ans[i].wrong.length).length,idx.length];});
+ save();sfx("key");setTimeout(()=>confetti(),150);}
+function result(l){const st=LS(l.id);const qs=l.questions;if(st.lastKey==null){if(st.q>=qs.length)finalize(l);else{st.lastKey=st.key;st.lastFirst=st.first;}}
+ const key=st.lastKey||st.key;const first=st.lastFirst!=null?st.lastFirst:st.first;const msg={gold:"GOLD KEY! You're a master of this skill!",silver:"SILVER KEY! Strong work — a few more first tries and it's gold.",bronze:"BRONZE KEY! You unlocked it. Review the lesson and retake for a shinier key."}[key];
+ const idx=T.locks.findIndex(x=>x.id===l.id);const nxt=T.locks.slice(idx+1).concat(T.locks.slice(0,idx)).find(x=>!(S.locks[x.id]&&S.locks[x.id].done));
+ let h=lockHead(l,"result")+`<div class="card result"><div class="bigkey">${keySVG(key,130)}</div><h2>${l.name} — Unlocked!</h2><p class="big"><b>${msg}</b></p>
+ <div class="rstats"><div class="rstat"><b>${first}/${qs.length}</b><span>right on 1st try</span></div>${(st.lastDok||[]).map((d,i)=>`<div class="rstat"><b>${d[0]}/${d[1]}</b><span>DOK ${i+1} first try</span></div>`).join("")}<div class="rstat"><b>${S.best}</b><span>best streak</span></div><div class="rstat"><b>${S.xp}</b><span>total XP</span></div></div>
+ <div class="callout gold" style="text-align:left"><b>🧠 Remember:</b> ${l.remember}</div>
+ <div class="navrow" style="justify-content:center"><button class="btn ghost" data-act="retake">🔁 Retake for a better key</button>${nxt?`<button class="btn gold" data-act="open" data-id="${nxt.id}">Next lock: ${esc(nxt.name)} →</button>`:`<button class="btn gold" data-act="home">Back to the locks 🏦</button>`}</div></div>`;
+ return h;}
+
+/* ---------- VAULT ---------- */
+function vault(){const d=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+ let h=`<div class="vault"><div class="noprint"><button class="btn ghost sm" data-act="home">← Locks</button></div>${S.vaultOpen?`<div class="opened">🏦✨</div>`:`<div class="door" id="door"><div class="wheel"></div></div>`}`;
+ if(!S.vaultOpen)h+=`<h2 class="fred" style="font-size:30px;color:var(--navy)">The Vault</h2><p>You hold all ${T.locks.length} keys. Spin the wheel!</p><button class="btn gold" data-act="spin">🔓 Spin to open</button>`;
+ else h+=`<div class="cert" id="cert"><div style="font-size:44px">🏆</div><h1>Vault Unlocked!</h1><p>This certifies that</p><div class="nm">${esc(S.name||"A Super Reader")}</div><p>has mastered <b>${esc(T.title)}</b><br>(Florida FAST Grade 6 ELA Reading)</p><div class="keyring">${T.locks.map(l=>`<span title="${esc(l.name)}">${keySVG(S.locks[l.id].key,46)}</span>`).join("")}</div><p><b>${S.xp} XP</b> · Level: <b>${level().name}</b> · ${S.badges.length} badges</p><p style="color:var(--muted)">${d}</p><p class="noprint"><button class="btn" data-act="print">🖨️ Print certificate</button> <button class="btn ghost" data-act="home">Back to the locks</button></p></div>`;
+ return h+`</div>`;}
+
+/* ---------- render + events ---------- */
+function render(){TTS.stop();let body="";
+ if(S.view==="home")body=home();
+ else if(S.view==="vault")body=vault();
+ else{const l=lockById(S.lock);if(!l){S.view="home";return render();}
+  const st=LS(l.id);const canResult=st.done&&(st.q>=l.questions.length||!st.retake);
+  body=S.step==="practice"?((st.retake||!st.done||st.q<l.questions.length)?practice(l):result(l)):S.step==="result"?(canResult?result(l):practice(l)):learn(l);}
+ app.innerHTML=topbar()+`<main><div class="wrap">${body}</div></main>`+footer();}
+function go(fn){fn();save();render();window.scrollTo(0,0);}
+app.addEventListener("click",e=>{
+ const sb=e.target.closest("[data-say]");if(sb){const el=document.querySelector(sb.dataset.say);if(el)TTS.speak(textOf(el),sb);return;}
+ const b=e.target.closest("[data-act]");if(!b)return;const act=b.dataset.act;const l=S.lock?lockById(S.lock):null;
+ switch(act){
+  case "name":{const v=($("#nm").value||"").trim();if(!v){$("#nm").focus();return;}S.name=v.slice(0,24);sfx("good");save();render();toast(`👋 Hi, ${esc(S.name)}! Pick a lock to begin.`);break;}
+  case "open":go(()=>{S.view="lock";S.lock=b.dataset.id;const st=LS(S.lock);S.step=st.retake?"practice":st.done?"result":st.learned&&st.q>0?"practice":"learn";});sfx("tap");break;
+  case "home":go(()=>{S.view="home";});break;
+  case "step":{const k=b.dataset.k;const st=LS(l.id);if(k==="result"&&!st.done)return;go(()=>{S.step=k;if(k==="practice"&&st.done&&st.q>=l.questions.length)S.step="result";});break;}
+  case "next":go(()=>{const st=LS(l.id);st.card=Math.min(st.card+1,l.lesson.length-1);});sfx("tap");break;
+  case "prev":go(()=>{const st=LS(l.id);st.card=Math.max(st.card-1,0);});break;
+  case "topractice":go(()=>{const st=LS(l.id);if(!st.learned){st.learned=true;addXP(15,"Lesson complete!");if(T.locks.every(x=>S.locks[x.id]&&S.locks[x.id].learned))award("books");}S.step=st.done&&st.q>=l.questions.length?"result":"practice";});break;
+  case "flip":b.classList.toggle("open");sfx("tap");break;
+  case "tc":{const ci=+b.dataset.ci,o=+b.dataset.o;const st=LS(l.id);const c=l.lesson[ci];const s=st.tc[ci]||(st.tc[ci]={wrong:[],ok:false});if(s.ok)return;
+   if(o===0){s.ok=true;sfx("good");if(!s.wrong.length){addXP(5,"Quick Check");}}else{s.wrong.push(o);sfx("bad");}save();render();break;}
+  case "ans":answer(l,+b.dataset.o);break;
+  case "hint":{const st=LS(l.id);const a=st.ans[st.q];a.hint=true;st.noHint=false;save();render();break;}
+  case "sayq":sayQuestion(l,b);break;
+  case "nextq":go(()=>{const st=LS(l.id);st.q++;if(st.q>=l.questions.length){st.lastKey=null;st.lastFirst=null;S.step="result";finalize(l);}});break;
+  case "retake":go(()=>{const st=LS(l.id);st.q=0;st.ans={};st.retake=true;st.lastKey=null;st.lastFirst=null;S.step="practice";});toast("🔁 Retake: no XP this time, but you can upgrade your key!");break;
+  case "vault":go(()=>{S.view="vault";});break;
+  case "spin":{const d=$("#door");d.classList.add("open");sfx("key");setTimeout(()=>{S.vaultOpen=true;award("vault");save();render();confetti(260);setTimeout(()=>confetti(200),900);},1400);break;}
+  case "print":window.print();break;
+  case "sound":S.sound=!S.sound;save();render();sfx("tap");break;
+  case "slow":S.slow=!S.slow;save();render();break;
+  case "reset":if(confirm("Erase ALL progress for this tutorial on this device?")&&confirm("Are you sure? This cannot be undone.")){try{localStorage.removeItem(KEY);}catch(e){}S=fresh();render();}break;
+ }});
+app.addEventListener("keydown",e=>{if(e.target.id==="nm"&&e.key==="Enter"){const btn=document.querySelector('[data-act="name"]');if(btn)btn.click();}});
+window.addEventListener("pagehide",save);
+render();
+})();
+
+</script>
+</body>
+</html>
